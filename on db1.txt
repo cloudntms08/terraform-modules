@@ -1,0 +1,41 @@
+On Db1,
+
+1) Allow 3306 on host VM 
+
+New-NetFirewallRule -DisplayName "Allow Port 3306" -Direction Inbound -Protocol TCP -LocalPort 3306 -Action Allow
+
+2) Download MySQL from below link:
+
+https://dev.mysql.com/downloads/file/?id=532678
+
+3) MySQL login
+
+bin/ mysql -u root -p
+
+4 ) Create DB and user and give permission
+
+CREATE DATABASE enquiries_db;
+
+CREATE USER 'enquiry_user'@'%' IDENTIFIED BY 'EnquiryPassword123!';
+GRANT ALL PRIVILEGES ON enquiries_db.* TO 'enquiry_user'@'%';
+FLUSH PRIVILEGES;
+
+
+5) Create Table in the db
+
+USE enquiries_db;
+
+CREATE TABLE inquiries (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+6) To check the data record
+
+USE enquiries_db;
+SELECT * FROM inquiries;
+
